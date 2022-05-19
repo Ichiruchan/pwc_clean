@@ -121,9 +121,9 @@ if __name__ == "__main__":
                                                  db_data=data_db_0)
     wrong_data = pd.concat([wrong_data_1, wrong_data_2])
 
-    # with pd.ExcelWriter("output/data_cleaned.xlsx",
-    #                     mode="w") as writer:
-    #     data_origin_cleaned_2_excel.to_excel(writer, sheet_name="data_origin_cleaned", startcol=0)
-    #     data_origin_cleaned.to_excel(writer, sheet_name="data_origin_cleaned", index=False, startrow=1, startcol=1)
-    #     data_db_cleaned.to_excel(writer, sheet_name="data_db_cleaned", index=False)
-    #     wrong_data.to_excel(writer, sheet_name="answer", index=False)
+    with pd.ExcelWriter("output/data_cleaned.xlsx",
+                        mode="w") as writer:
+        data_origin_cleaned_2_excel.to_excel(writer, sheet_name="data_origin_cleaned", startcol=0)
+        data_origin_cleaned.to_excel(writer, sheet_name="data_origin_cleaned", index=False, startrow=1, startcol=1)
+        data_db_cleaned.to_excel(writer, sheet_name="data_db_cleaned", index=False)
+        wrong_data.to_excel(writer, sheet_name="answer", index=False)
