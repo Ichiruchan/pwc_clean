@@ -1,3 +1,4 @@
+import numpy as np
 from loguru import logger
 import pandas as pd
 from itertools import product
@@ -120,6 +121,11 @@ if __name__ == "__main__":
     wrong_data_2 = get_wrong_data_origin_from_db(origin_data_df=data_origin.drop(index=wrong_index),
                                                  db_data=data_db_0)
     wrong_data = pd.concat([wrong_data_1, wrong_data_2])
+
+    #method 2
+    data_with_nan = origin_2_db(data_origin.drop(index=wrong_index)).rename({"Value": "Data in File"}, axis=1).replace(np.nan, 99999)
+    data_db_with_nan = data_db_0.rename({"Value": "Data in Db"}, axis=1).replace(np.nan, 99999)
+    res = data_with_nan.merge(data_db_with_nan, on=col_dict["Company Info"]+["Metric Name"], how="outer")
 
     with pd.ExcelWriter("output/data_cleaned.xlsx",
                         mode="w") as writer:
